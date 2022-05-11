@@ -2,6 +2,7 @@ import express, { urlencoded } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import { ConfigServer } from './config/config';
+import { DataSource } from 'typeorm';
 
 
 class Server extends ConfigServer {
@@ -14,10 +15,16 @@ class Server extends ConfigServer {
         this.app.use(urlencoded( {extended: true }));
 
 
+        this.dbConnect();
+
         this.app.use(morgan('tiny'));
         this.app.use(cors());
 
         this.start();
+    }
+
+    async dbConnect():Promise<DataSource>{
+        return await new DataSource(this.typeORMConfig).initialize();
     }
 
     public start(){

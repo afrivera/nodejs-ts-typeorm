@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv';
 import { DataSourceOptions } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { UserEntity } from '../entities/user.entity';
 
 export abstract class ConfigServer {
     constructor(){
@@ -34,11 +35,6 @@ export abstract class ConfigServer {
         return `.${arrEnv.join('.')}`;
     }
 
-//     DB_PORT = 3312
-// DB_HOST= localhost
-// DB_DATABASE= anfrivera_db
-// DB_USER= anfrivera
-// DB_PASSWORD= secret
     public get typeORMConfig():DataSourceOptions{
         return {
             type: "mysql",
@@ -47,7 +43,8 @@ export abstract class ConfigServer {
             username: this.getEnvironment('DB_USER'),
             password: this.getEnvironment('DB_PASSWORD'),
             database: this.getEnvironment('DB_DATABASE'),
-            entities: [__dirname + "/../**/*.entity{.ts, .js}"],
+            // entities: [__dirname + "/../**/*.entity{.ts, .js}"],
+            entities: [ UserEntity ],
             migrations: [__dirname + "/../../migrations/*{.ts, .js}"],
             synchronize: true,
             logging: false,
