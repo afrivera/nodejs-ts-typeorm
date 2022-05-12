@@ -1,5 +1,6 @@
-import { Column, Entity } from "typeorm";
-import { BaseEntity } from "../config/base.entity";
+import { Column, Entity, OneToOne } from "typeorm";
+import { BaseEntity } from "../../config/base.entity";
+import { CustomerEntity } from "../customers/customer.entity";
 
 @Entity({ name: 'user'})
 export class UserEntity extends BaseEntity{
@@ -20,4 +21,7 @@ export class UserEntity extends BaseEntity{
 
     @Column()
     numberphone!: number;
+
+    @OneToOne(()=> CustomerEntity, (customer)=> customer.user)
+    customer!: CustomerEntity
 }
