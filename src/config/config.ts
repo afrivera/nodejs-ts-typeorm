@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv';
-import { DataSourceOptions } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import path from 'path';
 
@@ -46,8 +46,12 @@ export abstract class ConfigServer {
             entities: [__dirname + "/../**/*.entity{.ts,.js}"],
             migrations: [__dirname + "/../../migrations/*{.ts,.js}"],
             synchronize: true,
-            logging: false,
-            namingStrategy: new SnakeNamingStrategy(),
+            logging: true,
+            namingStrategy: new SnakeNamingStrategy(), 
         }
+    }
+
+    async dbConnect():Promise<DataSource>{
+        return await new DataSource(this.typeORMConfig).initialize();
     }
 }

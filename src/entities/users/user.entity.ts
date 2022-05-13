@@ -4,7 +4,7 @@ import { CustomerEntity } from "../customers/customer.entity";
 
 @Entity({ name: 'user'})
 export class UserEntity extends BaseEntity{
-
+ 
     @Column()
     username!: string;
 
@@ -14,14 +14,18 @@ export class UserEntity extends BaseEntity{
     @Column()
     lastname!: string;
 
-    @Column({
-        nullable: true
-    })
-    jobposition?: string;
+    @Column()
+    email!: string;
 
     @Column()
-    numberphone!: number;
+    password!: string;
+
+    @Column()
+    city!: string;
+
+    @Column()
+    province!: string;
 
     @OneToOne(()=> CustomerEntity, (customer)=> customer.user)
-    customer!: CustomerEntity
+    customer!: CustomerEntity 
 }

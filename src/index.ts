@@ -2,7 +2,7 @@ import express, { urlencoded } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import { ConfigServer } from './config/config';
-import { DataSource } from 'typeorm';
+import { UserRouter } from './routes/user.router';
 
 
 class Server extends ConfigServer {
@@ -20,11 +20,15 @@ class Server extends ConfigServer {
         this.app.use(morgan('tiny'));
         this.app.use(cors());
 
+        // routes
+        this.app.use('/api', this.routes());
         this.start();
     }
 
-    async dbConnect():Promise<DataSource>{
-        return await new DataSource(this.typeORMConfig).initialize();
+    routes(): Array<express.Router> {
+        return [
+            new UserRouter().router
+        ]
     }
 
     public start(){
