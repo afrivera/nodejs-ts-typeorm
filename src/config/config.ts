@@ -1,7 +1,6 @@
 import * as dotenv from 'dotenv';
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
-import path from 'path';
 
 export abstract class ConfigServer {
     constructor(){ 
@@ -46,7 +45,7 @@ export abstract class ConfigServer {
             entities: [__dirname + "/../**/*.entity{.ts,.js}"],
             migrations: [__dirname + "/../../migrations/*{.ts,.js}"],
             synchronize: true,
-            logging: true,
+            logging: false,
             namingStrategy: new SnakeNamingStrategy(), 
         }
     }
