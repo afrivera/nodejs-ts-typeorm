@@ -4,7 +4,7 @@ import { ProductEntity } from '../products/product.entity';
 import { PurchaseEntity } from '../purchases/purchase.entity';
 
 @Entity({name: 'purchases_products'})
-export class PurchasesProducts extends BaseEntity {
+export class PurchasesProductsEntity extends BaseEntity {
 
     @Column()
     quantityProduct!: number;

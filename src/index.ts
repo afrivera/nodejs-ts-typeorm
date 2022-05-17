@@ -7,6 +7,7 @@ import { CategoryRouter } from './routes/category.router';
 import { ProductRouter } from './routes/product.router';
 import { CustomerRouter } from './routes/customer.router';
 import { PurchaseRouter } from './routes/purchase.router';
+import { PurchaseProductsRouter } from './routes/purchase-product.router';
 
 
 class Server extends ConfigServer {
@@ -30,6 +31,7 @@ class Server extends ConfigServer {
         this.app.use('/api/products', this.routes());
         this.app.use('/api/customers', this.routes());
         this.app.use('/api/purchases', this.routes());
+        this.app.use('/api/purchase-products', this.routes());
         this.start();
     }
 
@@ -40,6 +42,7 @@ class Server extends ConfigServer {
             new ProductRouter().router,
             new CustomerRouter().router,
             new PurchaseRouter().router,
+            new PurchaseProductsRouter().router
         ]
     }
 
