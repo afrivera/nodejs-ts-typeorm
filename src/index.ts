@@ -1,8 +1,9 @@
-import express, { urlencoded } from 'express';
+import express, { urlencoded, Request, Response, NextFunction,  Errback } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import { ConfigServer } from './config/config';
 import { UserRouter } from './routes/user.router';
+import { CategoryRouter } from './routes/category.router';
 
 
 class Server extends ConfigServer {
@@ -22,12 +23,14 @@ class Server extends ConfigServer {
 
         // routes
         this.app.use('/api/users', this.routes());
+        this.app.use('/api/categories', this.routes());
         this.start();
     }
 
     routes(): Array<express.Router> {
         return [
-            new UserRouter().router
+            new UserRouter().router,
+            new CategoryRouter().router,
         ]
     }
 
