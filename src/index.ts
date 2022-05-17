@@ -4,6 +4,8 @@ import cors from 'cors';
 import { ConfigServer } from './config/config';
 import { UserRouter } from './routes/user.router';
 import { CategoryRouter } from './routes/category.router';
+import { ProductRouter } from './routes/product.router';
+import { CustomerRouter } from './routes/customer.router';
 
 
 class Server extends ConfigServer {
@@ -24,6 +26,8 @@ class Server extends ConfigServer {
         // routes
         this.app.use('/api/users', this.routes());
         this.app.use('/api/categories', this.routes());
+        this.app.use('/api/products', this.routes());
+        this.app.use('/api/customers', this.routes());
         this.start();
     }
 
@@ -31,6 +35,8 @@ class Server extends ConfigServer {
         return [
             new UserRouter().router,
             new CategoryRouter().router,
+            new ProductRouter().router,
+            new CustomerRouter().router,
         ]
     }
 
