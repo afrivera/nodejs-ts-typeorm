@@ -26,12 +26,7 @@ class Server extends ConfigServer {
         this.app.use(cors());
 
         // routes
-        this.app.use('/api/users', this.routes());
-        this.app.use('/api/categories', this.routes());
-        this.app.use('/api/products', this.routes());
-        this.app.use('/api/customers', this.routes());
-        this.app.use('/api/purchases', this.routes());
-        this.app.use('/api/purchase-products', this.routes());
+        this.app.use('/api', this.routes());
         this.start();
     }
 
