@@ -8,6 +8,7 @@ import { ProductRouter } from './routes/product.router';
 import { CustomerRouter } from './routes/customer.router';
 import { PurchaseRouter } from './routes/purchase.router';
 import { PurchaseProductsRouter } from './routes/purchase-product.router';
+import { DataSource } from 'typeorm';
 
 
 class Server extends ConfigServer {
@@ -39,6 +40,12 @@ class Server extends ConfigServer {
             new PurchaseRouter().router,
             new PurchaseProductsRouter().router
         ]
+    }
+
+    async dbConnect():Promise<DataSource | void> {
+        return this.initConnect
+                    .then(()=> console.log('Connect Success'))
+                    .catch( err => console.log(err));
     }
 
     public start(){
