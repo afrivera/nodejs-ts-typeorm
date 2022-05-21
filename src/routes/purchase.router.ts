@@ -1,11 +1,12 @@
 import { BaseRouter } from '../config/baseRouter';
 import { PurchaseController } from '../controllers/purchase.controller';
+import { PurchaseMiddleware } from '../middlewares/purchase/purchase.middleware';
 
 
-export class PurchaseRouter extends BaseRouter <PurchaseController> {
+export class PurchaseRouter extends BaseRouter <PurchaseController, PurchaseMiddleware> {
 
     constructor(){
-        super( PurchaseController );
+        super( PurchaseController, PurchaseMiddleware );
     }
 
     routes(): void {
@@ -17,7 +18,7 @@ export class PurchaseRouter extends BaseRouter <PurchaseController> {
             this.controller.getPurchaseById( req, res )
         );
 
-        this.router.post('/purchase/', ( req, res)=> 
+        this.router.post('/purchase/', (req, res, next)=> [ this.middleware.purchaseValid(req, res, next)] ,( req, res)=> 
             this.controller.createPurchases( req, res )
         );
 
