@@ -24,6 +24,16 @@ export class UserController {
         }
     }
 
+    async getUserWithRelation( req: Request, res: Response){
+        try {
+            const { id } = req.params
+            const data = await this.userService.findUserWithRelation( id );
+            res.json(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async createUser( req: Request, res: Response){
         try {
             const data = await this.userService.createUser( req.body );

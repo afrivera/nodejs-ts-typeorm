@@ -9,23 +9,23 @@ export class CustomerRouter extends BaseRouter <CustomerController> {
     }
 
     routes(): void {
-        this.router.get( '/', (req, res )=>
+        this.router.get( '/customers', (req, res )=>
             this.controller.getCustomers( req, res )
         );
 
-        this.router.get( '/:id', (req, res )=>
+        this.router.get( '/customers/:id', (req, res )=>
             this.controller.getCustomerById( req, res )
         );
 
-        this.router.post( '/', (req, res )=>
+        this.router.post( '/customers', (req, res )=>
             this.controller.createCustomer( req, res )
         );
 
-        this.router.put( '/:id', (req, res )=>
+        this.router.put( '/customers/:id', (req, res )=>
             this.controller.updateCustomer( req, res )
         );
 
-        this.router.delete( '/:id', (req, res )=>
+        this.router.delete( '/customers/:id', (req, res )=>
             this.controller.deleteCustomer( req, res )
         );
     }
